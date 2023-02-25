@@ -1,74 +1,51 @@
-const computerChoiceDisplay = document.getElementById('computer-choice');
-const userChoiceDisplay = document.getElementById('your-choice');
-const WinnerResult = document.getElementById('results');
+const computerChoiceDisplay = document.getElementById("computer-choice");
+const userChoiceDisplay = document.getElementById("your-choice");
+const WinnerResult = document.getElementById("results");
 let userChoice;
 
-const possibleChoices = document.querySelectorAll('button');
+const possibleChoices = document.querySelectorAll("button");
 
+function generateComputerChoice() {
+  const randomNumber = Math.floor(Math.random() * 3) + 1;
 
-possibleChoices.forEach(possibleChoice => possibleChoice.addEventListener('click', (e)=> {
+  // method --> using ternary operator here below
+  // same as using all that if statments
+  // this is chaining of ternary operators
+  computerChoice =
+    randomNumber === 1 ? "Rock" : randomNumber === 2 ? "Paper" : "Scissor";
 
-userChoice = e.target.id;
-userChoiceDisplay.innerHTML= userChoice;
-
-generateComputerChoice()
-
-Winner()
-}))
-
-
-function generateComputerChoice(){
-
-    const randomNumber = Math.floor(Math.random()*3) +1;
-
-    if(randomNumber==1){
-
-        computerChoice = 'Rock'
-    }
-
-    if(randomNumber==2){
-
-        computerChoice = 'Paper'
-    }
-
-    if(randomNumber==3){
-
-        computerChoice = 'Scissor'
-    }
-
-computerChoiceDisplay.innerHTML = computerChoice;
+  computerChoiceDisplay.innerHTML = computerChoice;
 }
 
-function Winner(){
+function Winner() {
+  winner =
+    userChoice == computerChoice
+      ? "It is a tie"
+      : userChoice == "Rock" && computerChoice == "Paper"
+      ? "You Lose"
+      : userChoice == "Rock" && computerChoice == "Scissor"
+      ? "You Win"
+      : userChoice == "Paper" && computerChoice == "Rock"
+      ? "You Win"
+      : userChoice == "Paper" && computerChoice == "Scissor"
+      ? "You Lose"
+      : userChoice == "Scissor" && computerChoice == "Rock"
+      ? "You Lose"
+      : "You Win";
 
-    if(userChoice == computerChoice){
-        winner = 'It is a tie'
-    }
-
-
-    if(userChoice =='Rock' && computerChoice=='Paper'){
-        winner = 'You Lose'
-    }
-
-    if(userChoice =='Rock' && computerChoice=='Scissor'){
-        winner = 'You Win'
-    }
-
-    if(userChoice =='Paper' && computerChoice=='Rock'){
-        winner = 'You Win'
-    }
-
-    if(userChoice =='Paper' && computerChoice=='Scissor'){
-        winner = 'You Lose'
-    }
-
-    if(userChoice =='Scissor' && computerChoice=='Rock'){
-        winner = 'You Lose'
-    }
-
-    if(userChoice =='Rock' && computerChoice=='Paper'){
-        winner = 'You Win'
-    }
-
-    WinnerResult.innerHTML= winner;
+  WinnerResult.innerHTML = winner;
 }
+
+possibleChoices.forEach((possibleChoice) =>
+  possibleChoice.addEventListener("click", (e) => {
+    userChoice = e.target.id;
+    userChoiceDisplay.innerHTML = userChoice;
+
+    generateComputerChoice();
+
+    Winner();
+  })
+);
+
+// Note - always define function before calling them 
+// don't call before defining the function
