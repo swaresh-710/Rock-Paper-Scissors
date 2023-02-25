@@ -46,3 +46,6 @@ possibleChoices.forEach((possibleChoice) =>
     Winner();
   })
 );
+
+// Note - always define function before calling them 
+// don't call before defining the function
